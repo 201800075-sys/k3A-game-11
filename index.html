@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>連加法幼兒掌握評估系統</title>
+    <title>連加法幼兒掌握評估系統 - Miss Elsa</title>
     <style>
         :root {
             --purple: #8e7ab5;
@@ -97,27 +97,27 @@
             border-radius: 60px; cursor: pointer; display: none; font-weight: bold;
         }
 
-        /* 結束評估畫面 */
         #end-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255,255,255,0.98); display: none;
             flex-direction: column; justify-content: center; align-items: center; z-index: 1000;
             text-align: center; padding: 20px;
         }
-        .eval-title { font-size: 8vh; font-weight: bold; margin-bottom: 10px; }
         .eval-card { background: #fff; border: 4px solid var(--purple); border-radius: 30px; padding: 30px; max-width: 70%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .eval-title { font-size: 8vh; font-weight: bold; margin-bottom: 10px; }
+        .end-badge { margin-top: 30px; padding: 2vh 8vw; font-size: 3vh; color: #999; border: 2px solid #eee; border-radius: 50px; background: #f9f9f9; display: inline-block; }
     </style>
 </head>
 <body>
 
 <div id="end-overlay">
     <div class="eval-card">
-        <div id="eval-header" class="eval-title">挑戰成功！</div>
-        <p style="font-size: 4vh;">答對總數：<span id="final-score" style="color:var(--success-green); font-weight: bold;">0</span></p>
+        <div id="eval-header" class="eval-title">評估結束</div>
+        <p style="font-size: 4vh;">最終得分：<span id="final-score" style="color:var(--success-green); font-weight: bold;">0</span></p>
         <div id="eval-feedback" style="font-size: 3vh; color: #666; line-height: 1.5; margin-top: 20px; border-top: 2px dashed #ccc; padding-top: 20px;">
-            評估內容載入中...
+            分析中...
         </div>
-        <button onclick="location.reload()" style="margin-top: 30px; padding: 2vh 8vw; font-size: 3vh; background: var(--purple); color: white; border: none; border-radius: 50px; cursor: pointer;">再玩一次</button>
+        <div class="end-badge">評估已完成，請交還老師</div>
     </div>
 </div>
 
@@ -158,7 +158,7 @@
         const gain = audioCtx.createGain();
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.frequency.value = 523.25; // C5
+        osc.frequency.value = 523.25; 
         gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
@@ -269,7 +269,7 @@
         let feedback = "";
         
         if(score >= 10) {
-            header = "挑戰成功！🌟";
+            header = "表現出色！🌟";
             feedback = "教師評估：幼兒已完全掌握三數連加概念，計算反應敏捷且準確，可嘗試更大數值的練習。";
         } else if(score >= 6) {
             header = "表現穩定！👍";
@@ -278,7 +278,7 @@
             header = "繼續努力！🌱";
             feedback = "教師評估：幼兒正處於建立連加概念的階段。建議加強手口一致的點數訓練，降低對數字的混淆。";
         } else {
-            header = "再加油！📝";
+            header = "加油練習！📝";
             feedback = "教師評估：幼兒需更多個別引導，建議先回歸二數加法或 10 以內的實物點數與數量配對練習。";
         }
 
